@@ -3,5 +3,69 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ngx-binary-angular-ui": {
+      "projectType": "library",
+      "root": "projects/ngx-binary-angular-ui",
+      "sourceRoot": "projects/ngx-binary-angular-ui/src",
+      "prefix": "binary",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-binary-angular-ui/ng-package.json",
+            
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-binary-angular-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-binary-angular-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ngx-binary-angular-ui/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/ngx-binary-angular-ui/.storybook",
+            "browserTarget": "ngx-binary-angular-ui:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/ngx-binary-angular-ui"
+            ],
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/ngx-binary-angular-ui/.storybook",
+            "browserTarget": "ngx-binary-angular-ui:build",
+            "compodoc": true,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/ngx-binary-angular-ui"
+            ],
+            "outputDir": "storybook-static"
+          }
+        }
+      }
+    }
   }
 }
